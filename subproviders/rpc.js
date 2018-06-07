@@ -1,4 +1,4 @@
-const xhr = process.browser ? require('xhr') : require('request')
+// const xhr = process.browser ? require('xhr') : require('request')
 const inherits = require('util').inherits
 const createPayload = require('../util/create-payload.js')
 const Subprovider = require('./subprovider.js')
@@ -20,6 +20,8 @@ RpcSource.prototype.handleRequest = function(payload, next, end){
 
   // overwrite id to conflict with other concurrent users
   let newPayload = createPayload(payload)
+  
+  const xhr = process.browser ? require('xhr').default : require('request')
 
   xhr({
     uri: targetUrl,
